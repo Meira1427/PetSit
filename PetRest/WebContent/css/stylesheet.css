@@ -8,17 +8,37 @@ body {
 }
 
 div#main {
-	width: 50%;
+	width: 80%;
 	height: 50%;
 	background-color: #d1a4cd;
 	border: 4px solid #401d3e;
-	margin: 25%;
+	margin: 7%;
 	padding: 3%;
 }
 
-/* 
-"http://streaming.yayimages.com/images/photographer/lzt/e2f3ab5639c1e780962f240418446b1b/background-with-animal-footprints-and-dog-and-cat-silhouette.jpg"
-http://streaming.yayimages.com/images/photographer/lzt/f9fb2f07ab18257f6447085fc318c0ca/pet-shop-background.jpg
- */
+table {
+	width: 100%;
+}
 
+td, th {
+	text-align: left;
+}
 
+form {
+	font-size: .9em;
+	margin: 1%;
+}
+
+#tasks {
+	width: 200px;
+}
+
+button {
+	padding: 1%;
+	margin: 2%;
+}
+
+td>button {
+	padding: 1%;
+	margin: 2%;
+}
