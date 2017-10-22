@@ -21,7 +21,7 @@ public class PetDAOImpl implements PetDAO {
 
 	@Override
 	public List<Pet> getAll() {
-		String queryString = "Select p from pet";
+		String queryString = "Select p from Pet p";
 		return em.createQuery(queryString, Pet.class)
 				 .getResultList();
 	}
@@ -78,6 +78,4 @@ public class PetDAOImpl implements PetDAO {
 		em.remove(managedPet);
 		return true;
 	}
-	
-
 }
