@@ -78,4 +78,10 @@ public class PetDAOImpl implements PetDAO {
 		em.remove(managedPet);
 		return true;
 	}
+
+	@Override
+	public double getTotalEarnings() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

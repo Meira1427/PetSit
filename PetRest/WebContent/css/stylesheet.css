@@ -24,6 +24,10 @@ td, th {
 	text-align: left;
 }
 
+td#rate, td#days, th#daily, th#num {
+	text-align: center;
+}
+
 form {
 	font-size: .9em;
 	margin: 1%;
@@ -38,7 +42,6 @@ button {
 	margin: 2%;
 }
 
-td>button {
-	padding: 1%;
-	margin: 2%;
+#delete {
+	margin: 0 0 0 1%;
 }

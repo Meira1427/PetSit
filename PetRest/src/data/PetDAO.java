@@ -10,5 +10,6 @@ public interface PetDAO {
 	public Pet createNew(String petJSON);
 	public Pet updatePet(int id, Pet pet);
 	public boolean destroy(int id);
+	public double getTotalEarnings();
 
 }

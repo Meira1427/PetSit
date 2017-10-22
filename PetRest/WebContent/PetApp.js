@@ -31,21 +31,20 @@ var buildDomTable = function(data){
    	var th5 = $('<th>');
    	var th6 = $('<th>');
    	var th6 = $('<th>');
-   	var th7 = $('<th>');
- 	//th1.text('Id');
-   	th2.text('Pet Name');
-	th3.text('Family Name');
-	th4.text('Tasks');
-	th5.text('Daily Rate');
-	th6.text('Num Days');
-	th7.text('Edit');
- 	// trh.append(th1);
+   	th1.text('Pet Name');
+	th2.text('Family Name');
+	th3.text('Tasks');
+	th4.text('Daily Rate');
+	th4.attr('id', 'daily');
+	th5.text('Num Days');
+	th5.attr('id', 'num');
+	th6.text('Edit');
+	trh.append(th1);
    	trh.append(th2);
    	trh.append(th3);
    	trh.append(th4);
    	trh.append(th5);
    	trh.append(th6);
-   	trh.append(th7);
    	head.append(trh);
    	table.append(head);
    	var body = $('<tbody>');
@@ -62,11 +61,12 @@ var buildDomTable = function(data){
 		td3.text(pet.tasks);
 		td4.text(pet.dailyRate);
 		td5.text(pet.numDays);
+		td4.attr('id', 'rate');
+		td5.attr('id', 'days');
 	   	var button = $('<button>');
 	   	button.text('Edit');
-	   	button.attr('id',pet.id);
+		button.attr('class', 'tableButton');
 	   	button.click(function(){
-		   	var id = $(this).attr('id');
 		   	displayEditPet(pet);
 	   	});
 	   	td6.append(button);
@@ -149,6 +149,20 @@ var displayEditPet = function(pet){
    });
    form.append(submit);
    $('#content').append(form);
+   console.log("getting ready for button: " + pet);
+   if(pet != null) {
+	   var deleteButton = $('<input>');
+	   deleteButton.attr('type', 'submit');
+	   deleteButton.attr('name', 'submit');
+	   deleteButton.attr('id','delete');
+	   deleteButton.attr('value', 'Delete');
+	   deleteButton.click(function(e){
+		   e.preventDefault();
+		   deletePet(pet.id);
+	   });
+	   $('#content').append(deleteButton);
+	   $('#content').append('<br>');
+   }
    var listButton = $('<button>');
    listButton.text('Return to List');
    listButton.attr('id', 'list');
@@ -203,4 +217,17 @@ var createNewPet = function(){
 	   .fail(function(xhr, status, error){
 		   console.error("Error");
 	   });
+};
+
+var deletePet = function(id){
+ $.ajax({
+	 type: 'DELETE',
+	 url: 'api/pets/' + id,
+	 })
+	 .done(function(data, status){
+		 loadPets();
+	 })
+	 .fail(function(xhr, status, error){
+		 console.error("Error");
+	 });
 };
