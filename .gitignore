@@ -1,0 +1,12 @@
+.DS_Store
+target
+build
+bin
+classes
+gradle
+gradlew
+/.metadata/
+.metadata
+Servers
+.recommenders
+.settings
