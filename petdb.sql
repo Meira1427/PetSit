@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `pet` (
   `pet_name` VARCHAR(45) NOT NULL,
   `fam_name` VARCHAR(45) NOT NULL,
   `tasks` VARCHAR(300) NOT NULL,
-  `daily_rate` DECIMAL(3,2) NOT NULL,
+  `daily_rate` DECIMAL(6,2) NOT NULL,
   `num_days` INT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -44,4 +44,3 @@ INSERT INTO `pet` (`id`, `pet_name`, `fam_name`, `tasks`, `daily_rate`, `num_day
 INSERT INTO `pet` (`id`, `pet_name`, `fam_name`, `tasks`, `daily_rate`, `num_days`) VALUES (2, 'Whiskers', 'Fredrickson', 'check food water litter box', 4.75, 3);
 
 COMMIT;
-

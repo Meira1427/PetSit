@@ -5,6 +5,11 @@ body {
 	background-repeat: no-repeat;
 	font-size: 1.4em;
 	font-family: Geogia, serif;
+	color: #00414c;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
 }
 
 div#main {
@@ -12,8 +17,8 @@ div#main {
 	height: 50%;
 	background-color: #d1a4cd;
 	border: 4px solid #401d3e;
-	margin: 7%;
-	padding: 3%;
+	margin: 7% 7%;
+	padding: 2%;
 }
 
 table {
@@ -22,6 +27,11 @@ table {
 
 td, th {
 	text-align: left;
+	padding-right: 2%;
+}
+
+th {
+	border-bottom: 1px double #00a3c0;
 }
 
 td#rate, td#days, th#daily, th#num {
@@ -39,9 +49,19 @@ form {
 
 button {
 	padding: 1%;
-	margin: 2%;
+	margin: 1%;
 }
 
 #delete {
 	margin: 0 0 0 1%;
+}
+
+h1 {
+	text-align: center;
+	line-height: .3;
+	font-family: cursive;
+}
+
+h3 {
+	color: red;
 }

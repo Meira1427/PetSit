@@ -60,7 +60,7 @@ public class PetDAOImpl implements PetDAO {
 				managedPet.setDailyRate(pet.getDailyRate());
 			}
 			if(pet.getNumDays() != 0) {
-				managedPet.setDailyRate(pet.getDailyRate());
+				managedPet.setNumDays(pet.getNumDays());
 			}
 			if(pet.getPetName() != null && pet.getPetName() != "") {
 				managedPet.setPetName(pet.getPetName());
@@ -81,7 +81,13 @@ public class PetDAOImpl implements PetDAO {
 
 	@Override
 	public double getTotalEarnings() {
-		// TODO Auto-generated method stub
-		return 0;
+		List<Pet> pet = getAll();
+		double total = 0;
+		for (int i = 0; i < pet.size(); i++) {
+			double rate = pet.get(i).getDailyRate();
+			int numDays = pet.get(i).getNumDays();
+			total += rate*numDays;
+		}
+		return total;
 	}
 }

@@ -79,5 +79,10 @@ public class PetSitController {
 	public boolean destroy(@PathVariable int id) {
 		return petDao.destroy(id);
 	}
+	
+	@RequestMapping(path="total", method=RequestMethod.GET)
+	public double getTotal() {
+		return petDao.getTotalEarnings();
+	}
 
 }

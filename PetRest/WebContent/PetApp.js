@@ -19,7 +19,6 @@ var loadPets = function(){
 
 var buildDomTable = function(data){
 	$('#content').empty();
-	console.log(data);
 	//set up table header
  	var table = $('<table>');
    	var head = $('<thead>');
@@ -70,7 +69,6 @@ var buildDomTable = function(data){
 		   	displayEditPet(pet);
 	   	});
 	   	td6.append(button);
-		// trb.append(td1);
 	   	trb.append(td1);
 	   	trb.append(td2);
 	   	trb.append(td3);
@@ -87,11 +85,18 @@ var buildDomTable = function(data){
 	   displayEditPet(null);
    	});
    	$('#content').append(newButton);
+	$('#content').append('<br>');
+	var calculate = $('<button>');
+   	calculate.text('Calculate Earnings');
+   	calculate.click(function(){
+	   calculateEarnings();
+   	});
+	$('#content').append(calculate);
 };
 
 var displayEditPet = function(pet){
-	console.log("in pet form");
 	$('#content').empty();
+	$('#messages').empty();
 	var form = $('<form>');
 	form.attr('name', 'petForm');
 	var input1 = $('<input>');
@@ -149,7 +154,6 @@ var displayEditPet = function(pet){
    });
    form.append(submit);
    $('#content').append(form);
-   console.log("getting ready for button: " + pet);
    if(pet != null) {
 	   var deleteButton = $('<input>');
 	   deleteButton.attr('type', 'submit');
@@ -171,28 +175,42 @@ var displayEditPet = function(pet){
 };
 
 var editPet = function(id){
-	console.log('in edit pet');
-	var editPet = {
-		petName: $(petForm.pet).val(),
-		familyName: $(petForm.family).val(),
-		tasks: $(petForm.tasks).val(),
-		dailyRate: $(petForm.rate).val(),
-		numDays: $(petForm.days).val()
+	var rate = $(petForm.rate).val();
+	var days;
+	if(!isNaN($(petForm.days).val())) {
+		days = parseInt($(petForm.days).val());
 	}
-	console.log(editPet);
-	$.ajax({
-	   type: 'PUT',
-	   url: 'api/pets/' + id,
-	   dataType: 'json',
-	   contentType: 'application/json',
-	   data: JSON.stringify(editPet)
-   })
-   .done(function(data, status){
-	   loadPets();
-   })
-   .fail(function(xhr, status, error){
-	   console.error("Error");
-   });
+	if(isNaN(rate) || isNaN($(petForm.days).val()) ) {
+		console.log('found bad data');
+		loadPets();
+		var h3 = $('<h3>');
+		h3.text("Invalid Input. No Changes Made");
+		console.log(h3);
+		$('#messages').append(h3);
+	}
+	else {
+		var editPet = {
+			petName: $(petForm.pet).val(),
+			familyName: $(petForm.family).val(),
+			tasks: $(petForm.tasks).val(),
+			dailyRate: rate,
+			numDays: days
+		}
+		console.log(editPet);
+		$.ajax({
+		   type: 'PUT',
+		   url: 'api/pets/' + id,
+		   dataType: 'json',
+		   contentType: 'application/json',
+		   data: JSON.stringify(editPet)
+	   })
+	   .done(function(data, status){
+		   loadPets();
+	   })
+	   .fail(function(xhr, status, error){
+		   console.error("Error");
+	   });
+   }
 };
 
 var createNewPet = function(){
@@ -230,4 +248,28 @@ var deletePet = function(id){
 	 .fail(function(xhr, status, error){
 		 console.error("Error");
 	 });
+};
+
+var calculateEarnings = function(){
+	$('#content').empty();
+	$('#messages').empty();
+
+	$.ajax({
+		type: 'GET',
+		url: 'api/total',
+		dataType: "json"
+	})
+	.done(function(data, status){
+		var h2 = $('<h2>');
+		h2.text('Total Earnings: ' + data);
+		$('#content').append(h2);
+		var listButton = $('<button>');
+	    listButton.text('Return to List');
+	    listButton.attr('id', 'list');
+	    listButton.click(loadPets);
+	    $('#content').append(listButton);
+	})
+	.fail(function(xhr, status, error){
+		console.error("Error");
+	});
 };
