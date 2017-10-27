@@ -1,1 +1,36 @@
-<h1>Petsit Component</h1>
+<h1>Petsitting Jobs
+<span></span>
+</h1>
+
+<table ng-hide="vm.selected">
+	<thead>
+		<tr>
+			<th>Pet Name</th>
+			<th>Family Name</th>
+			<th>Tasks</th>
+			<th>Daily Rate</th>
+			<th>Num Days</th>
+			<th>Edit</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat='pet in vm.petlist | orderBy: "id"'>
+			<td>{{pet.petName}}</td>
+			<td>{{pet.familyName}}</td>
+			<td>{{pet.tasks}}</td>
+			<td>{{pet.dailyRate}}</td>
+			<td>{{pet.numDays}}</td>
+			<td><input type='submit' name='submit' value='Edit' ng-click="vm.displayPet(pet)" /></td>
+		</tr>
+	</tbody>
+</table>
+<form ng-show='vm.selected'>
+	<lable>Pet Name:</lable><input type='text' ng-model='vm.selected.petName'><br>
+	<lable>Family Name:</lable><input type='text' ng-model='vm.selected.familyName'><br>
+	<lable>Tasks:</lable><input id='tasks' type='text' ng-model='vm.selected.tasks'><br>
+	<lable>Daily Rate:</lable><input type='text' ng-model='vm.selected.dailyRate'><br>
+	<lable>Num Days:</lable><input type='text' ng-model='vm.selected.numDays'><br>
+	<input type='submit' value='Save' ng-click='vm.updatePet(vm.selected); vm.selected=null' /><br>
+	<input type='submit' value='Cancel' ng-click='vm.displayTable()' /><br>
+</form>
+  
