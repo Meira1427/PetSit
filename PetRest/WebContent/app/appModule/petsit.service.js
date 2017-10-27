@@ -9,6 +9,35 @@ angular.module('petsitModule')
 			})	
 		};
 		
+		service.update = function(pet){
+			return $http({
+				method : 'PUT',
+				url : 'api/pets/' + pet.id,
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+				data : pet
+			})
+		}
+		
+		service.create = function(pet) {
+			console.log(pet);
+			return $http({
+				method : 'POST',
+				url : 'api/pets',
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+				data : pet
+			})
+		}
+		
+		service.destroy = function(id) {
+			return $http({
+				method : 'DELETE',
+				url : 'api/pets/' + id
+			})
+		}
 		
 		return service;
 	});

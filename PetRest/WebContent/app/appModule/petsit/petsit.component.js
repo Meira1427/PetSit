@@ -6,7 +6,7 @@ angular.module('petsitModule')
 			var vm = this;
 			
 			vm.selected = null;
-			
+			vm.newEntry = false;
 			
 			vm.petlist = [];
 			
@@ -30,10 +30,39 @@ angular.module('petsitModule')
 			
 			vm.displayTable = function() {
 				vm.selected = null;
+			};
+			
+			vm.updatePet = function(pet){
+				petsitService.update(pet)
+				.then(function(res){
+					getAll();
+				})
+				.catch(function(error){
+					console.log(error);
+				});
+				vm.selected = null;	
+			};
+			
+			vm.addPet = function(pet) {
+				petsitService.create(pet)
+				.then(function(res){
+					getAll();
+				})
+				.catch(function(error){
+					console.log(error);
+				});
 			}
 			
-			
-			
+			vm.deletePet = function(id) {
+				petsitService.destroy(id)
+				.then(function(res){
+					getAll();
+				})
+				.catch(function(error){
+					console.log(error);
+				});
+				vm.selected = null;	
+			}
 			
 		},
 			

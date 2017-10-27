@@ -2,7 +2,7 @@
 <span></span>
 </h1>
 
-<table ng-hide="vm.selected">
+<table ng-hide="vm.selected || vm.newEntry">
 	<thead>
 		<tr>
 			<th>Pet Name</th>
@@ -24,6 +24,10 @@
 		</tr>
 	</tbody>
 </table>
+<div ng-hide='vm.selected || vm.newEntry'>
+	<button ng-click='vm.newEntry=true'>New Pet</button><br>
+	<button ng-click=''>Total Earnings</button>
+</div>
 <form ng-show='vm.selected'>
 	<lable>Pet Name:</lable><input type='text' ng-model='vm.selected.petName'><br>
 	<lable>Family Name:</lable><input type='text' ng-model='vm.selected.familyName'><br>
@@ -31,6 +35,16 @@
 	<lable>Daily Rate:</lable><input type='text' ng-model='vm.selected.dailyRate'><br>
 	<lable>Num Days:</lable><input type='text' ng-model='vm.selected.numDays'><br>
 	<input type='submit' value='Save' ng-click='vm.updatePet(vm.selected); vm.selected=null' /><br>
+	<input type='submit' value='Delete' ng-click='vm.deletePet(vm.selected.id)' /><br>
 	<input type='submit' value='Cancel' ng-click='vm.displayTable()' /><br>
 </form>
+<div ng-show='vm.newEntry'>
+	<lable>Pet Name:</lable><input type='text' ng-model='new.petName'><br>
+	<lable>Family Name:</lable><input type='text' ng-model='new.familyName'><br>
+	<lable>Tasks:</lable><input id='tasks' type='text' ng-model='new.tasks'><br>
+	<lable>Daily Rate:</lable><input type='text' ng-model='new.dailyRate'><br>
+	<lable>Num Days:</lable><input type='text' ng-model='new.numDays'><br>
+	<input type='submit' value='Save' ng-click='vm.addPet(new); vm.newEntry=false' /><br>
+	<input type='submit' value='Cancel' ng-click='vm.displayTable()' /><br>
+</div>
   
