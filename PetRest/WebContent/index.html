@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app='todoModule'>
+<html ng-app='petsitModule'>
 <head>
   <title>Petsitting</title>
   <link rel="stylesheet" href="css/stylesheet.css" />
@@ -9,17 +9,14 @@
  <!--  modules, services filters, components -->
   <script src="app/appModule/app.module.js"></script>
   <script src="app/appModule/petsit.service.js"></script>
-
+  <script src="app/appModule/petsit/petsit.component.js"></script>
   <link rel="icon"
   		type="image/png"
-      	ng-href="check.png" />
+      	ng-href="pawprint.png" />
 </head>
 <body>
-	<div id='navbar'>
-		<navigation></navigation>
-	</div>
 	<div id='main'>
-	  <ng-view></ng-view>
+	  <petsit>Loading. . .</petsit>
 	</div>
 </body>
 </html>
