@@ -25,8 +25,11 @@
 	</tbody>
 </table>
 <div ng-hide='vm.selected || vm.newEntry'>
-	<button ng-click='vm.newEntry=true'>New Pet</button><br>
-	<button ng-click=''>Total Earnings</button>
+	<button ng-click='vm.newEntry=true; vm.totalEarnings=null'>New Pet</button><br>
+	<button ng-click='vm.getTotalEarnings()'>Total Earnings</button>
+</div>
+<div ng-show='vm.totalEarnings'>
+	<h3>Total Earnings: {{vm.totalEarnings}}</h3>
 </div>
 <form ng-show='vm.selected'>
 	<lable>Pet Name:</lable><input type='text' ng-model='vm.selected.petName'><br>

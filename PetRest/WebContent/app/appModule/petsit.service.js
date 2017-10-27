@@ -39,5 +39,13 @@ angular.module('petsitModule')
 			})
 		}
 		
+		service.total = function() {
+			console.log("entering in service.total");
+			return $http({
+				method : 'GET',
+				url : 'api/total'
+			})
+		}
+		
 		return service;
 	});

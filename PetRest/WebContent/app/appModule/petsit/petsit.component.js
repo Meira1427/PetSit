@@ -7,6 +7,7 @@ angular.module('petsitModule')
 			
 			vm.selected = null;
 			vm.newEntry = false;
+			vm.totalEarnings = null;
 			
 			vm.petlist = [];
 			
@@ -24,12 +25,15 @@ angular.module('petsitModule')
 			getAll();
 			
 			vm.displayPet = function(pet){
+				vm.totalEarnings = null;
 				vm.selected = pet;
 				console.log(vm.selected);
 			};
 			
 			vm.displayTable = function() {
 				vm.selected = null;
+				vm.totalEarnings = null;
+				vm.newEntry = false;
 			};
 			
 			vm.updatePet = function(pet){
@@ -62,6 +66,18 @@ angular.module('petsitModule')
 					console.log(error);
 				});
 				vm.selected = null;	
+			}
+			
+			vm.getTotalEarnings = function() {
+				console.log("Entering getTotal()")
+				petsitService.total()
+				.then(function(res){
+					vm.totalEarnings = res.data;
+					console.log("Total earnings: " + vm.totalEarnings);
+				})
+				.catch(function(error){
+					console.log(error);
+				});
 			}
 			
 		},
