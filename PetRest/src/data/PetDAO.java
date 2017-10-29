@@ -8,7 +8,7 @@ public interface PetDAO {
 	public List<Pet> getAll();
 	public Pet getById(int id);
 	public Pet createNew(String petJSON);
-	public Pet updatePet(int id, Pet pet);
+	public Pet updatePet(int id, String petJSON);
 	public boolean destroy(int id);
 	public double getTotalEarnings();
 

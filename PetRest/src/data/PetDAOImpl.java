@@ -1,5 +1,6 @@
 package data;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -47,9 +48,15 @@ public class PetDAOImpl implements PetDAO {
 	}
 
 	@Override
-	public Pet updatePet(int id, Pet pet) {
+	public Pet updatePet(int id, String petJSON) {
 		Pet managedPet = em.find(Pet.class, id);
-		if(managedPet != null) {
+		if(managedPet==null) {
+			return managedPet;
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		Pet pet = null;
+		try {
+			pet = mapper.readValue(petJSON, Pet.class);
 			if(pet.getFamilyName() != null && pet.getFamilyName() != "") {
 				managedPet.setFamilyName(pet.getFamilyName());
 			}
@@ -65,6 +72,10 @@ public class PetDAOImpl implements PetDAO {
 			if(pet.getPetName() != null && pet.getPetName() != "") {
 				managedPet.setPetName(pet.getPetName());
 			}
+			
+		} catch (IOException e) {
+		
+			e.printStackTrace();
 		}
 		return pet;
 	}

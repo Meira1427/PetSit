@@ -62,17 +62,14 @@ public class PetSitController {
 	public Pet update(	@PathVariable int id, 
 						@RequestBody String petJSON, 
 						HttpServletResponse res) {
-		ObjectMapper mapper = new ObjectMapper();
-		Pet mappedPet = null;
-		try {
-			mappedPet = mapper.readValue(petJSON, Pet.class);
-			petDao.updatePet(id, mappedPet);
-			res.setStatus(202);
-		} catch (IOException e) {
+		Pet pet = petDao.updatePet(id, petJSON);
+		if(pet == null) {
 			res.setStatus(400);
-			e.printStackTrace();
 		}
-		return mappedPet;
+		else {
+			res.setStatus(202);
+		}
+		return pet;	
 	}
 	
 	@RequestMapping(path="pets/{id}", method=RequestMethod.DELETE)
@@ -80,6 +77,7 @@ public class PetSitController {
 		return petDao.destroy(id);
 	}
 	
+	//path defined for getting total earnings and routing to partial with total earnings
 	@RequestMapping(path="total", method=RequestMethod.GET)
 	public double getTotal() {
 		return petDao.getTotalEarnings();
